@@ -90,6 +90,10 @@ namespace Microsoft.Xna.Framework.Graphics
             PlatformConstruct(graphicsDevice, width, height, mipMap, preferredDepthFormat, preferredMultiSampleCount, usage, shared);
 	    }
 
+        public RenderTarget2D(GraphicsDevice graphicsDevice, int width, int height, bool shared)
+            : base(graphicsDevice, width, height, false, SurfaceFormat.Color, SurfaceType.RenderTarget, shared, 1)
+        { }
+
         /// <summary />
         protected static SurfaceFormat QuerySelectedFormat(GraphicsDevice graphicsDevice, SurfaceFormat preferredFormat)
         {

@@ -9,7 +9,7 @@ namespace Microsoft.Xna.Framework.Graphics
 {
     public abstract partial class Texture
     {
-        private Resource _texture;
+        protected Resource _texture;
 
         private ShaderResourceView _resourceView;
 

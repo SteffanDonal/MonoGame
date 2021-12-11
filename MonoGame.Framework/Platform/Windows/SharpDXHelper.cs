@@ -120,7 +120,75 @@ namespace Microsoft.Xna.Framework
             }
         }
 
-		static public RawVector2 ToVector2(this Vector2 vec)
+        static public SurfaceFormat FromFormat(SharpDX.DXGI.Format format)
+        {
+            switch (format)
+            {
+                case SharpDX.DXGI.Format.R8G8B8A8_UNorm:
+                    return SurfaceFormat.Color;
+
+                case SharpDX.DXGI.Format.B5G6R5_UNorm:
+                    return SurfaceFormat.Bgr565;
+                case SharpDX.DXGI.Format.B5G5R5A1_UNorm:
+                    return SurfaceFormat.Bgra5551;
+                case SharpDX.DXGI.Format.B4G4R4A4_UNorm:
+                    return SurfaceFormat.Bgra4444;
+
+                case SharpDX.DXGI.Format.BC1_UNorm:
+                    return SurfaceFormat.Dxt1;
+                case SharpDX.DXGI.Format.BC2_UNorm:
+                    return SurfaceFormat.Dxt3;
+                case SharpDX.DXGI.Format.BC3_UNorm:
+                    return SurfaceFormat.Dxt5;
+                case SharpDX.DXGI.Format.R8G8_SNorm:
+                    return SurfaceFormat.NormalizedByte2;
+                case SharpDX.DXGI.Format.R8G8B8A8_SNorm:
+                    return SurfaceFormat.NormalizedByte4;
+                case SharpDX.DXGI.Format.R10G10B10A2_UNorm:
+                    return SurfaceFormat.Rgba1010102;
+                case SharpDX.DXGI.Format.R16G16_UNorm:
+                    return SurfaceFormat.Rg32;
+                case SharpDX.DXGI.Format.R16G16B16A16_UNorm:
+                    return SurfaceFormat.Rgba64;
+                case SharpDX.DXGI.Format.A8_UNorm:
+                    return SurfaceFormat.Alpha8;
+                case SharpDX.DXGI.Format.R32_Float:
+                    return SurfaceFormat.Single;
+                case SharpDX.DXGI.Format.R16_Float:
+                    return SurfaceFormat.HalfSingle;
+                case SharpDX.DXGI.Format.R16G16_Float:
+                    return SurfaceFormat.HalfVector2;
+                case SharpDX.DXGI.Format.R32G32_Float:
+                    return SurfaceFormat.Vector2;
+                case SharpDX.DXGI.Format.R32G32B32A32_Float:
+                    return SurfaceFormat.Vector4;
+                case SharpDX.DXGI.Format.R16G16B16A16_Float:
+                    return SurfaceFormat.HalfVector4; // Note, could also be HdrBlendable but we can't distinguish.
+
+                case SharpDX.DXGI.Format.B8G8R8X8_UNorm:
+                    return SurfaceFormat.Bgr32;
+                case SharpDX.DXGI.Format.B8G8R8A8_UNorm:
+                    return SurfaceFormat.Bgra32;
+
+                case SharpDX.DXGI.Format.R8G8B8A8_UNorm_SRgb:
+                    return SurfaceFormat.ColorSRgb;
+                case SharpDX.DXGI.Format.B8G8R8X8_UNorm_SRgb:
+                    return SurfaceFormat.Bgr32SRgb;
+                case SharpDX.DXGI.Format.B8G8R8A8_UNorm_SRgb:
+                    return SurfaceFormat.Bgra32SRgb;
+                case SharpDX.DXGI.Format.BC1_UNorm_SRgb:
+                    return SurfaceFormat.Dxt1SRgb;
+                case SharpDX.DXGI.Format.BC2_UNorm_SRgb:
+                    return SurfaceFormat.Dxt3SRgb;
+                case SharpDX.DXGI.Format.BC3_UNorm_SRgb:
+                    return SurfaceFormat.Dxt5SRgb;
+
+                default:
+                    throw new ArgumentOutOfRangeException("format", string.Format("No mapping from format {0} to SurfaceFormat!", format));
+            }
+        }
+
+        static public RawVector2 ToVector2(this Vector2 vec)
         {
             return new RawVector2(vec.X, vec.Y);
         }

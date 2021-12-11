@@ -2,6 +2,7 @@
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
+using System;
 using SharpDX.Direct3D11;
 using SharpDX.DXGI;
 
@@ -14,6 +15,17 @@ namespace Microsoft.Xna.Framework.Graphics
         private SharpDX.Direct3D11.Texture2D _msTexture;
 
         private SampleDescription _msSampleDescription;
+
+        public RenderTarget2D(GraphicsDevice graphicsDevice, IntPtr sharedPtr)
+            : base(graphicsDevice)
+        {
+            SharpDX.Direct3D11.Texture2D dxTexture = GraphicsDevice._d3dDevice.OpenSharedResource<SharpDX.Direct3D11.Texture2D>(sharedPtr);
+
+            this.width = dxTexture.Description.Width;
+            this.height = dxTexture.Description.Height;
+            this._format = SharpDXHelper.FromFormat(dxTexture.Description.Format);
+            this._texture = dxTexture;
+        }
 
         private void PlatformConstruct(GraphicsDevice graphicsDevice, int width, int height, bool mipMap,
             DepthFormat preferredDepthFormat, int preferredMultiSampleCount, RenderTargetUsage usage, bool shared)

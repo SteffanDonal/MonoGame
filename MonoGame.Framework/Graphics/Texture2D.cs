@@ -243,6 +243,18 @@ namespace Microsoft.Xna.Framework.Graphics
             PlatformConstruct(width, height, mipmap, format, type, shared);
         }
 
+        protected Texture2D(GraphicsDevice graphicsDevice)
+        {
+            if (graphicsDevice == null)
+            {
+                throw new ArgumentNullException("graphicsDevice", FrameworkResources.ResourceCreationWhenDeviceIsNull);
+            }
+
+            this.GraphicsDevice = graphicsDevice;
+            this._levelCount = 1;
+            this.ArraySize = 1;
+        }
+
         /// <summary>
         /// Gets the width of the texture in pixels.
         /// </summary>
